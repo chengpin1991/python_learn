@@ -1,5 +1,5 @@
-#-*- coding : utf-8 -*-
-import urllib, sys, re, HTMLParser
+#-*- coding: utf-8 -*-
+import urllib, sys, re, xlwt
 reload(sys)
 sys.setdefaultencoding('utf-8')
 response = urllib.urlopen('http://music.baidu.com/top/dayhot')
@@ -20,9 +20,23 @@ while '' in song_names:
 
 while '' in singers_list:
 	singers_list.remove('')
-i = 0
+
+
+#将数据写入xls中
+#创建一个空文件
+des_file = xlwt.Workbook()
+sheet = des_file.add_sheet('song_infos', cell_overwrite_ok=True)
+#向空文件中写一个表头,并设置样式
+styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour ocean_blue; font: bold on;'); # 80% like
+sheet.write(0, 0, u'歌曲名', styleBlueBkg)
+sheet.write(0, 1, u'歌手', styleBlueBkg)
+
+col = 1
 for song_name in song_names:
-	open('result', 'a').write(song_name.encode('utf-8', 'ignore') + '        ' + singers_list[i].encode('utf-8', 'ignore') + "\n")
-	i = i + 1
-
-
+	sheet.write(col, 0, song_name.decode('utf-8'))
+	sheet.write(col, 1, singers_list[col-1].decode('utf-8'))
+	#设置列宽
+	sheet.col(0).width = 256*40    
+	sheet.col(1).width = 526*15
+	col = col + 1
+des_file.save('song_infos.xls')
