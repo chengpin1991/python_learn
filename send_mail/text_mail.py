@@ -4,11 +4,11 @@ send text or html email
 '''
 from smtplib import SMTP
 from email.mime.text import MIMEText
-mailto_list = ['chengpin@fun.tv', 'zhengxc@fun.tv']
-mail_host = "mail.funshion.com:25"
-mail_user = "chengpin"
-mail_password = "1q2w3e4r!"
-mail_suffix = "@funshion.com"
+mailto_list = ['****@****', '****@*****']
+mail_host = '********'
+mail_user = '******'
+mail_password = "*******"
+mail_suffix = '@*******'
 
 #subject:主题
 #邮件组成：发件人，收件人，主题，邮件内容，附件等
